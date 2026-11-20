@@ -1,0 +1,6 @@
+{
+  "name": "ERP Umrah & Haji SaaS - DDL & Backend Architect (Fase 1)",
+  "description": "Sistem ERP SaaS Multi-Tenant Biro Perjalanan Umrah & Haji berbasis PostgreSQL Fase 1: DDL SQL, Hierarki Cabang, RBAC, HR, Master Siskopatuh, & RLS Policies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,555 @@
+import {
+  ChartOfAccount,
+  MasterDataRequest,
+  OfficeExpense,
+  PayrollRun,
+  DocumentTemplate,
+  OutgoingLetter,
+  AuditLog,
+  InboxItem,
+  GeneralLedgerEntry,
+} from '../types/erp.ts';
+
+export const mockChartOfAccounts: ChartOfAccount[] = [
+  // 1000 - ASET LANCAR
+  {
+    coa_code: '1101',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Kas di Tangan (Kas Operasional & Petty Cash)',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '1102',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Kas di Bank (Bank Operasional)',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '1103',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Deposito & Dana Cadangan',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '1110',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Piutang Usaha Jamaah & Agen',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '1120',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Uang Muka Operasional (Tiket, Hotel, Visa & Transportasi)',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '1130',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Persediaan Perlengkapan Ibadah (Koper, Ihram, Mukena, Seragam)',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '1140',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Biaya Dibayar di Muka',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '1150',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Pajak Dibayar di Muka (PPN Masukan)',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: true,
+    tax_type: 'PPN_MASUKAN',
+  },
+  // 1500 - ASET TETAP
+  {
+    coa_code: '1501',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Peralatan Kantor & Audio Manasik',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '1502',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Akumulasi Penyusutan Aset Tetap',
+    account_type: 'ASSET',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  // 2000 - KEWAJIBAN / LIABILITAS
+  {
+    coa_code: '2101',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Utang Usaha Vendor (Airlines, Hotel, Visa, Muassasah)',
+    account_type: 'LIABILITY',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '2102',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Pendapatan Diterima di Muka (DP & Pelunasan Paket Jamaah)',
+    account_type: 'LIABILITY',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '2103',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Utang Gaji & Tunjangan Karyawan',
+    account_type: 'LIABILITY',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '2104',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Utang Pajak (PPh 21, PPh 23, PPN Keluaran)',
+    account_type: 'LIABILITY',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: true,
+    tax_type: 'PPN_KELUARAN',
+  },
+  {
+    coa_code: '2105',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Utang Titipan / Deposit Jamaah & Mitra',
+    account_type: 'LIABILITY',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  // 3000 - EKUITAS
+  {
+    coa_code: '3101',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Modal Disetor Pemilik',
+    account_type: 'EQUITY',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '3201',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Laba Ditahan (Retained Earnings)',
+    account_type: 'EQUITY',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  // 4000 - PENDAPATAN
+  {
+    coa_code: '4101',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Pendapatan Paket Umrah & Haji Khusus',
+    account_type: 'REVENUE',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '4102',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Pendapatan Layanan Badal Umrah & Haji',
+    account_type: 'REVENUE',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '4103',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Pendapatan Penjualan Tiket, Visa & Dokumen Perjalanan',
+    account_type: 'REVENUE',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+  // 5000 - BEBAN POKOK PENDAPATAN (HPP)
+  {
+    coa_code: '5101',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Pokok - Tiket Pesawat Penerbangan',
+    account_type: 'EXPENSE_DIRECT',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '5102',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Pokok - Akomodasi Hotel Makkah & Madinah',
+    account_type: 'EXPENSE_DIRECT',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '5103',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Pokok - Visa Umrah/Haji & Asuransi Saudi',
+    account_type: 'EXPENSE_DIRECT',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '5104',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Pokok - Transportasi Bus & Kereta Cepat Haramain',
+    account_type: 'EXPENSE_DIRECT',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '5105',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Pokok - Katering & Konsumsi Jamaah',
+    account_type: 'EXPENSE_DIRECT',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '5106',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Pokok - Muassasah / Maktab & Layanan Masyair',
+    account_type: 'EXPENSE_DIRECT',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '5107',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Pokok - Perlengkapan & Atribut Jamaah',
+    account_type: 'EXPENSE_DIRECT',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '5108',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Pokok - Muthawif, Tour Leader & Pembimbing Ibadah',
+    account_type: 'EXPENSE_DIRECT',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  // 6000 - BEBAN OPERASIONAL KANTOR
+  {
+    coa_code: '6101',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Gaji & Tunjangan Pegawai',
+    account_type: 'EXPENSE_OPEX',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '6102',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Operasional Kantor & Utilitas',
+    account_type: 'EXPENSE_OPEX',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  {
+    coa_code: '6103',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Beban Manasik & Sosialisasi Jamaah',
+    account_type: 'EXPENSE_OPEX',
+    normal_balance: 'D',
+    is_active: true,
+    is_tax_account: false,
+  },
+  // 7000 - PENDAPATAN & BEBAN LAIN
+  {
+    coa_code: '7101',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    coa_name: 'Selisih Kurs Valuta Asing (Realized & Unrealized FX)',
+    account_type: 'REVENUE',
+    normal_balance: 'C',
+    is_active: true,
+    is_tax_account: false,
+  },
+];
+
+export const mockMasterDataRequests: MasterDataRequest[] = [
+  {
+    request_id: 'req-01',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    branch_id_pengaju: 'C01', // Kediri
+    request_type: 'ADD_MASTER',
+    request_payload: {
+      head_code: 'PKG01',
+      child_code: 'UMR-RAMADHAN-15D',
+      description: 'Paket Umrah Iktikaf Lailatul Qadar 15 Hari',
+      cd1: '32000000', // HPP Asli
+      cd2: '36000000', // Nett KSO
+      cd3: '42000000', // Publish
+      cd4: 'HOTEL_PULLMAN_ZAMZAM',
+    },
+    status: 'PENDING',
+    submitted_by_name: 'Ust. Ahmad Fauzan (Kepala Cabang Kediri)',
+    notes: 'Permohonan penambahan paket program Ramadhan 1447H untuk konsorsium Kediri.',
+    created_at: '2026-10-09T08:30:00Z',
+  },
+  {
+    request_id: 'req-02',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    branch_id_pengaju: 'C01',
+    request_type: 'ADD_COA',
+    request_payload: {
+      coa_code: '1110',
+      coa_name: 'Piutang Kasbon Pegawai',
+      account_type: 'ASSET',
+      normal_balance: 'D',
+    },
+    status: 'PENDING',
+    submitted_by_name: 'Ust. Ahmad Fauzan',
+    notes: 'Pembuatan akun pembukuan kasbon staf lokal.',
+    created_at: '2026-10-09T09:15:00Z',
+  },
+];
+
+export const mockOfficeExpenses: OfficeExpense[] = [
+  {
+    expense_id: 'exp-01',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    branch_id: 'C01', // Kediri KSO
+    expense_date: '2026-10-08',
+    expense_no: 'EXP/C01/2026/10/001',
+    category: 'KONSUMSI_MANASIK',
+    description: 'Snack & Konsumsi Manasik Jamaah Kloter 1 di Masjid Agung Kediri',
+    amount: 650000,
+    paid_from_coa_code: '1101', // Kas di Tangan
+    expense_coa_code: '6102', // Beban Operasional Kantor
+    status: 'RELEASED',
+    created_by_name: 'Ust. Ahmad Fauzan',
+    created_at: '2026-10-08T10:00:00Z',
+  },
+  {
+    expense_id: 'exp-02',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    branch_id: 'C01',
+    expense_date: '2026-10-09',
+    expense_no: 'EXP/C01/2026/10/002',
+    category: 'BIAYA_KURIR_PASPOR',
+    description: 'Pengiriman Berkas Paspor Fisik 45 Pax ke Bagian Visa HQ Jakarta via JNE YES',
+    amount: 320000,
+    paid_from_coa_code: '1101', // Kas di Tangan
+    expense_coa_code: '6102', // Beban Operasional Kantor
+    status: 'APPROVED',
+    created_by_name: 'Admin Staf Kediri',
+    created_at: '2026-10-09T08:15:00Z',
+  },
+];
+
+export const mockPayrollRun: PayrollRun = {
+  payroll_run_id: 'prun-2026-10',
+  tenant_id: '11111111-1111-1111-1111-111111111111',
+  branch_id: 'C00',
+  payroll_period_month: 10,
+  payroll_period_year: 2026,
+  payroll_no: 'PAYROLL/C00/2026/10/001',
+  total_gaji_pokok: 35000000,
+  total_tunjangan: 8500000,
+  total_bpjs_kesehatan: 550000,
+  total_bpjs_ketenagakerjaan: 850000,
+  total_pph21: 1850000,
+  total_kasbon_deduction: 500000,
+  total_gaji_netto: 39750000,
+  status: 'DRAFT_MAKER',
+  prepared_by_name: 'Staff HR & Payroll HQ',
+  created_at: '2026-10-09T08:00:00Z',
+};
+
+export const mockDocumentTemplates: DocumentTemplate[] = [
+  {
+    template_id: 'tmpl-01',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    branch_id: null,
+    template_name: 'Surat Undangan Manasik Akbar & Pengambilan Perlengkapan',
+    template_type: 'INVITATION',
+    html_content: `
+      <div style="font-family: sans-serif; padding: 20px;">
+        <h3 style="color: #047857; text-align: center;">UNDANGAN RESMI MANASIK AKBAR UMRAH 1447H</h3>
+        <p>Kepada Yth. Bapak/Ibu: <strong>{{nama_tujuan}}</strong></p>
+        <p>Dengan hormat, kami mengundang Bapak/Ibu untuk menghadiri Bimbingan Manasik Akbar yang akan dilaksanakan pada:</p>
+        <ul>
+          <li>Hari / Tanggal: <strong>{{tanggal_acara}}</strong></li>
+          <li>Tempat: Hotel Grand Surya / Aula Utama Cabang</li>
+          <li>Agenda: Pemantapan Rukun Umrah, Pengambilan Koper & Seragam Resmi</li>
+        </ul>
+        <p>Mohon hadir tepat waktu dengan membawa paspor asli bagi yang belum diverifikasi.</p>
+      </div>
+    `,
+    is_active: true,
+  },
+  {
+    template_id: 'tmpl-02',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    branch_id: null,
+    template_name: 'Surat Perintah Kerja (SPK) Muthawif Lapangan Saudi',
+    template_type: 'SPK',
+    html_content: `
+      <div style="font-family: sans-serif; padding: 20px;">
+        <h3 style="color: #0284c7; text-align: center;">SURAT PERINTAH KERJA (SPK) PEMBIMBING IBADAH</h3>
+        <p>Ditujukan kepada Muthawif: <strong>{{nama_tujuan}}</strong></p>
+        <p>Tanggal Efektif Penugasan: <strong>{{tanggal_acara}}</strong></p>
+        <p>Uraian Tugas: Membimbing rombongan jamaah kloter dari ketibaan Bandara Madinah, ziarah Raudhah, Miqat Bir Ali, dan Thawaf Sa'i di Masjidil Haram Makkah.</p>
+      </div>
+    `,
+    is_active: true,
+  },
+];
+
+export const mockOutgoingLetters: OutgoingLetter[] = [
+  {
+    letter_id: 'let-01',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    branch_id: 'C01', // Kediri
+    template_id: 'tmpl-01',
+    template_name: 'Surat Undangan Manasik Akbar & Pengambilan Perlengkapan',
+    letter_number: 'SK/C01/2026/10/0042',
+    recipient_name: 'Hj. Siti Aminah & H. Budi Santoso',
+    subject: 'Undangan Manasik Akbar Pra-Keberangkatan Kloter 1 Jawa Timur',
+    event_date: '2026-10-25',
+    rendered_body_html: `Kepada Yth. Bapak/Ibu Hj. Siti Aminah & H. Budi Santoso, diundang manasik akbar tanggal 25 Oktober 2026.`,
+    google_calendar_event_id: 'gcal_evt_kediri_manasik_1025',
+    gcal_sync_status: 'SYNCED',
+    created_by_name: 'Ust. Ahmad Fauzan (Kepala Cabang Kediri)',
+    created_at: '2026-10-09T08:20:00Z',
+  },
+];
+
+export const mockAuditLogs: AuditLog[] = [
+  {
+    log_id: 'aud-01',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    table_name: 'journal_masters',
+    record_id: 'jrn-01',
+    action_type: 'UPDATE',
+    old_data: { workflow_status: 'APPROVED', approver_id: 'usr-hq-01' },
+    new_data: { workflow_status: 'RELEASED', releaser_id: 'usr-hq-01', released_at: '2026-10-09T08:00:00Z' },
+    user_name: 'H. Muhammad Ridwan, M.M. (Admin HQ)',
+    ip_address: '180.252.164.12',
+    created_at: '2026-10-09T08:00:02Z',
+  },
+  {
+    log_id: 'aud-02',
+    tenant_id: '11111111-1111-1111-1111-111111111111',
+    table_name: 'office_expenses',
+    record_id: 'exp-01',
+    action_type: 'INSERT',
+    old_data: null,
+    new_data: { expense_no: 'EXP/C01/2026/10/001', amount: 650000, category: 'KONSUMSI_MANASIK' },
+    user_name: 'Ust. Ahmad Fauzan (Admin Kediri)',
+    ip_address: '114.124.200.45',
+    created_at: '2026-10-08T10:00:15Z',
+  },
+];
+
+export const mockGeneralLedgerEntries: GeneralLedgerEntry[] = [
+  {
+    doc_date: '2026-10-08',
+    doc_no: 'JRN/C01/2026/10/0001',
+    doc_type: 'CUSTOMER_DP',
+    branch_id: 'C01',
+    coa_code: '1101-C01',
+    coa_name: 'Kas Kecil (Petty Cash) Cabang Kediri KSO',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    debit_base_amount: 10000000,
+    credit_base_amount: 0,
+    net_movement: 10000000,
+    running_balance: 10000000,
+    notes: 'Penerimaan Setoran Awal DP Seat Umrah Hj. Siti Aminah',
+    released_at: '2026-10-08T14:00:00Z',
+  },
+  {
+    doc_date: '2026-10-08',
+    doc_no: 'JRN/C01/2026/10/0001',
+    doc_type: 'CUSTOMER_DP',
+    branch_id: 'C01',
+    coa_code: '2103-DP-JAMAAH',
+    coa_name: 'Pendapatan Diterima Di Muka (DP Seat Jamaah)',
+    account_type: 'LIABILITY',
+    normal_balance: 'C',
+    debit_base_amount: 0,
+    credit_base_amount: 10000000,
+    net_movement: 10000000,
+    running_balance: 10000000,
+    notes: 'Penerimaan Setoran Awal DP Seat Umrah Hj. Siti Aminah',
+    released_at: '2026-10-08T14:00:00Z',
+  },
+  {
+    doc_date: '2026-10-09',
+    doc_no: 'JRN/C00/2026/10/0002',
+    doc_type: 'PO_EXPENSE',
+    branch_id: 'C00',
+    coa_code: '5103-HPP-ASURANSI-TAKAFUL',
+    coa_name: 'Beban Pokok - Polis Asuransi Syariah Jamaah',
+    account_type: 'EXPENSE_DIRECT',
+    normal_balance: 'D',
+    debit_base_amount: 21250000,
+    credit_base_amount: 0,
+    net_movement: 21250000,
+    running_balance: 21250000,
+    notes: 'Pelunasan Asuransi Jiwa & Medis 50 Pax x 100 SAR (Kurs Rp 4.250)',
+    released_at: '2026-10-09T08:00:00Z',
+  },
+  {
+    doc_date: '2026-10-09',
+    doc_no: 'JRN/C00/2026/10/0002',
+    doc_type: 'PO_EXPENSE',
+    branch_id: 'C00',
+    coa_code: '1102-RAJHI-SAR',
+    coa_name: 'Bank Al-Rajhi KSA (Escrow SAR Saudi)',
+    account_type: 'ASSET',
+    normal_balance: 'D',
+    debit_base_amount: 0,
+    credit_base_amount: 21250000,
+    net_movement: -21250000,
+    running_balance: -21250000,
+    notes: 'Pelunasan Asuransi Jiwa & Medis 50 Pax x 100 SAR',
+    released_at: '2026-10-09T08:00:00Z',
+  },
+];

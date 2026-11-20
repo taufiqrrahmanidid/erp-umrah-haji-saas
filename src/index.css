@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (min-width: 1440px) {
+    html {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 2560px) {
+    html {
+      font-size: 17px;
+    }
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Sage Brand Theme (#98C3BC & #C0DDD6) */
+:root {
+  --sage-primary: #98C3BC;
+  --sage-secondary: #C0DDD6;
+  --sage-dark: #1E3F39;
+  --sage-bg: #F4F8F7;
+  --sage-border: #C0DDD6;
+}
+
+html.theme-sage {
+  background-color: #F4F8F7;
+  color: #162C27;
+}
+
+html.theme-sage body {
+  background-color: #F4F8F7;
+  color: #162C27;
+}
+
+.bg-sage-primary {
+  background-color: #98C3BC;
+}
+
+.bg-sage-secondary {
+  background-color: #C0DDD6;
+}
+
+.border-sage-primary {
+  border-color: #98C3BC;
+}
+
+.border-sage-secondary {
+  border-color: #C0DDD6;
+}
+
+.text-sage-dark {
+  color: #1E3F39;
+}
+
+/* Custom Ergonomic Scrollbars */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 9999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
+}
